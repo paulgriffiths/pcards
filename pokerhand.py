@@ -1,6 +1,6 @@
 """Poker hand module.
 
-Library Release 1.1
+Library Release 1.2
 
 Copyright 2013 Paul Griffiths
 Email: mail@paulgriffiths.net
