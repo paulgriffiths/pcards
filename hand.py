@@ -13,7 +13,7 @@ http://www.gnu.org/licenses/
 
 from collections import defaultdict
 
-from pcards import Card, get_rank_integer
+from card import Card, get_rank_integer
 
 
 # Exceptions

@@ -13,7 +13,8 @@ http://www.gnu.org/licenses/
 
 from collections import namedtuple
 
-from pcards import rank_string, Hand
+from card import rank_string
+from hand import Hand
 
 
 # Non-public named tuples
