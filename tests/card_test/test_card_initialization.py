@@ -12,7 +12,7 @@
 
 import unittest
 
-from pcards import Card, CardArgumentError
+from ...card import Card, CardArgumentError
 
 
 class TestSequenceFunctions(unittest.TestCase):

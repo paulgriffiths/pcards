@@ -12,7 +12,7 @@
 
 import unittest
 
-from pcards import Deck
+from ...deck import Deck
 
 
 class TestSequenceFunctions(unittest.TestCase):

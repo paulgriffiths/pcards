@@ -8,8 +8,10 @@ of different hands when run over the entire population.
 """
 
 
-from pcards import Deck, PokerHand
 import timeit
+
+from ..deck import Deck
+from ..pokerhand import PokerHand
 
 
 def main():

@@ -12,7 +12,8 @@
 
 import unittest
 
-from pcards import Card, Deck
+from ...card import Card
+from ...deck import Deck
 
 
 class TestSequenceFunctions(unittest.TestCase):

@@ -14,7 +14,9 @@
 
 import unittest
 
-from pcards import Deck, Hand, Card, NoAssociatedDeckError
+from ...card import Card
+from ...deck import Deck
+from ...hand import Hand, NoAssociatedDeckError
 
 
 class TestSequenceFunctions(unittest.TestCase):

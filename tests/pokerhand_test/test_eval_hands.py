@@ -16,7 +16,7 @@ Test module for PokerHand object of cards module.
 
 import unittest
 
-from pcards import PokerHand
+from ...pokerhand import PokerHand
 
 
 class TestSequenceFunctions(unittest.TestCase):

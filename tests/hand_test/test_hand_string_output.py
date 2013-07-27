@@ -14,7 +14,7 @@
 
 import unittest
 
-from pcards import Hand
+from ...hand import Hand
 
 
 class TestSequenceFunctions(unittest.TestCase):
