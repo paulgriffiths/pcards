@@ -36,4 +36,6 @@ nosetests.xml
 
 # Setup
 setup/dist
+setup/build
 setup/pcards
+setup/MANIFEST
