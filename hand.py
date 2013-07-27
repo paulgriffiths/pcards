@@ -294,7 +294,7 @@ class Hand(object):
                                       "by a positive integer")
         else:
             new_cards = []
-            for copies in range(other):
+            for copies in range(other):    # pylint: disable=W0612
                 new_cards.extend(self.get_list())
             return self.__class__(cardlist=new_cards, nocopy=True)
 
@@ -319,7 +319,7 @@ class Hand(object):
                                       "Hand by a positive integer")
         else:
             new_cards = []
-            for copies in range(other):
+            for copies in range(other):    # pylint: disable=W0612
                 new_cards.extend(self.get_list())
             return self.__class__(cardlist=new_cards, nocopy=True)
 
@@ -344,7 +344,7 @@ class Hand(object):
                                       "a positive integer")
         else:
             new_cards = []
-            for copies in range(other - 1):
+            for copies in range(other - 1):    # pylint: disable=W0612
                 new_cards.extend(self.get_list())
             self._cards.extend(new_cards)
             self._cards_changed()
@@ -416,8 +416,7 @@ class Hand(object):
             for card in self._cards:
                 if card.index() == item.index():
                     return True
-            else:
-                return False
+            return False
 
     # Container methods
 
@@ -472,15 +471,13 @@ class Hand(object):
             for idx, card in enumerate(self._cards):
                 if card.index() == value.index():
                     return idx
-            else:
-                raise ValueError("Card.index(x): x not in Card")
+            raise ValueError("Card.index(x): x not in Card")
         elif isinstance(value, int) or isinstance(value, basestring):
             value = get_rank_integer(value)
             for idx, card in enumerate(self._cards):
                 if card.rank() == value:
                     return idx
-            else:
-                raise ValueError("Card.index(x): x not in Card")
+            raise ValueError("Card.index(x): x not in Card")
         else:
             raise ValueError("Card.index(c): x not in Card")
 

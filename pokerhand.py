@@ -124,7 +124,12 @@ class PokerHand(Hand):
             if hsl.fargs:
                 arg_list = [rank_string(self._hand_info_item(item))
                             for item in hsl.fargs]
+
+                # Disable pylint warning for '* or ** magic'
+                # pylint: disable=W0142
                 return hsl.fstr.format(*arg_list).capitalize()
+                # pylint: enable=W0142
+
             else:
                 return hsl.fstr.format()
         else:

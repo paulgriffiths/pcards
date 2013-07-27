@@ -57,8 +57,12 @@ class Deck(object):
         if not isinstance(packs, int) or not packs > 0:
             raise ValueError("Argument 'packs' must be a positive integer.")
 
+        # Disable pylint warning about unused variable 'pack'
+        # pylint: disable=W0612
         self._cards = [Card(index=idx) for pack in range(packs)
                                        for idx in range(51, -1, -1)]
+        # pylint: enable=W0612
+
         self._discards = []
 
     # Public methods
@@ -191,5 +195,4 @@ class Deck(object):
             for card in self._cards:
                 if card.index() == item.index():
                     return True
-            else:
-                return False
+            return False
