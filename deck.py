@@ -13,7 +13,7 @@ http://www.gnu.org/licenses/
 
 import random
 
-from card import Card
+from .card import Card
 
 
 class EmptyDeckError(Exception):
