@@ -303,13 +303,17 @@ class Card(object):
         else:
             raise CardArgumentError("Missing or mismatched card arguments.")
 
+        self._facedown = True
+
     # Public methods
 
     def copy(self):
 
         """Returns a copy of the card."""
 
-        return self.__class__(index=self.index())
+        copy_card = self.__class__(index=self.index())
+        copy_card._facedown = self._facedown
+        return copy_card
 
     def rank(self):
 
@@ -345,6 +349,36 @@ class Card(object):
         """
 
         return self._index
+
+    def face_down(self, status=True):
+
+        """Turns the card face down, or face up if status is False."""
+
+        self._facedown = status
+
+    def face_up(self, status=True):
+
+        """Turns the card face up, or face down if status is False."""
+
+        self._facedown = not status
+
+    def flip(self):
+
+        """Turns the card face up if it is face down, or vice versa."""
+
+        self._facedown = not self._facedown
+
+    def is_face_down(self):
+
+        """Returns True if a card if face down, false if not."""
+
+        return self._facedown
+
+    def is_face_up(self):
+
+        """Returns True if a card if face up, false if not."""
+
+        return not self._facedown
 
     def rank_string(self, short=False, capitalize=False):
 
