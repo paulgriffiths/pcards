@@ -139,37 +139,51 @@ class Hand(object):
         self._cards = []
         self._cards_changed()
 
-    def draw(self, numcards):
+    def draw(self, numcards, face_up=False, face_down=True):
 
         """Draws a specific number of cards from the deck.
 
         Arguments:
         numcards -- the number of cards to draw.
+        face_up -- draw the new cards face up if True
+        face_down -- draw the new cards face down if True
 
         """
 
         if self._deck is None:
             raise NoAssociatedDeckError
         else:
-            self._cards.extend(self._deck.draw(numcards))
+            self._cards.extend(self._deck.draw(numcards, face_up, face_down))
             self._cards_changed()
 
-    def exchange(self, chg):
+    def exchange(self, chg=None, face_up=False, face_down=False):
 
         """Exchanges selected cards for new cards drawn from the deck.
 
         Arguments:
         chg -- a string of digits containing the positions of the
         cards to be exchanged, starting at 1, e.g. "125", or "3", or
-        "14".
+        "14". If this is missing, all cards which are face down will
+        be exchanged.
+        face_up -- draw the new cards face up if True
+        face_down -- draw the new cards face down if True
 
         """
 
         discards = []
-        for idx in chg:
-            if int(idx) in range(len(self._cards)):
-                discards.append(self._cards[int(idx) - 1])
-                self._cards[int(idx) - 1] = self._deck.draw()[0]
+
+        if chg:
+            for idx in chg:
+                if int(idx) in range(len(self._cards)):
+                    discards.append(self._cards[int(idx) - 1])
+                    self._cards[int(idx) - 1] = self._deck.draw(1,
+                            face_up, face_down)[0]
+        else:
+            for idx, card in enumerate(self._cards):
+                if card.is_face_down():
+                    discards.append(card)
+                    self._cards[idx] = self._deck.draw(1, face_up, face_down)[0]
+
         self._deck.discard(discards)
         self._cards_changed()
 
