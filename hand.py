@@ -173,14 +173,41 @@ class Hand(object):
         self._deck.discard(discards)
         self._cards_changed()
 
+    def face_up(self, position=None):
+
+        """Turns one or all the cards in the hand face up."""
+
+        if position:
+            self._cards[position - 1].face_up()
+        else:
+            for card in self._cards:
+                card.face_up()
+
+    def face_down(self, position=None):
+
+        """Turns one or all the cards in the hand face down."""
+
+        if position:
+            self._cards[position - 1].face_down()
+        else:
+            for card in self._cards:
+                card.face_down()
+
+    def flip(self, position=None):
+
+        """Flips one or all the cards in the hand."""
+
+        if position:
+            self._cards[position - 1].flip()
+        else:
+            for card in self._cards:
+                card.flip()
+
     def get_list(self):
 
-        """Returns a copy of the card list."""
+        """Returns the card list."""
 
-        copied_cards = []
-        for original_card in self._cards:
-            copied_cards.append(original_card.copy())
-        return copied_cards
+        return self._cards
 
     def index_list(self):
 
@@ -360,22 +387,17 @@ class Hand(object):
 
     def __getitem__(self, key):
 
-        """Returns a copy of the card at the specified index.
-
-        Note that, since __getitem__ (deliberately) returns a copy,
-        statements such as myhand[1]._index = 0 will not modify myhand,
-        as 0 will be assigned to _index in the copy, not to _index in
-        the actual card at myhand[1].
+        """Returns the card at the specified index.
 
         """
 
         if isinstance(key, slice):
             new_list = []
             for original_card in self._cards[key]:
-                new_list.append(original_card.copy())
+                new_list.append(original_card)
             return Hand(cardlist=new_list, nocopy=True)
         else:
-            return self._cards[key].copy()
+            return self._cards[key]
 
     def __setitem__(self, key, value):
 
