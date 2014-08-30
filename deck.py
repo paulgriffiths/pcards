@@ -87,13 +87,15 @@ class Deck(object):
 
         return len(self._discards)
 
-    def draw(self, number=1):
+    def draw(self, number=1, face_up=False, face_down=False):
 
         """Draws one or more cards from the top of the deck and returns
         it or them in a list.
 
         Arguments:
         number -- the number of cards to draw.
+        face_up -- draw the new cards face up if True
+        face_down -- draw the new cards face down if True
 
         """
 
@@ -101,6 +103,13 @@ class Deck(object):
             raise EmptyDeckError
         else:
             drawn_cards = self._cards[-number:]
+
+            if face_up:
+                for card in drawn_cards:
+                    card.face_up()
+            elif face_down:
+                for card in drawn_cards:
+                    card.face_down()
 
             # Call reverse() to simulate cards being popped
             # off the top of the deck in order
