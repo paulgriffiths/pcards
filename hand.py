@@ -95,6 +95,7 @@ class Hand(object):
         self._score = []
         self._cards = []
         self._deck = deck
+        self._observers = []
 
         if numcards and deck and not namelist:
             self.draw(numcards)
@@ -235,6 +236,19 @@ class Hand(object):
         """
 
         return [card.index() for card in self._cards]
+
+    def observe(self, target, callback):
+
+        """Adds an observer."""
+
+        if target not in self._observers:
+            self._observers.append((target, callback))
+
+    def unobserve(self, target):
+
+        """Removes an observer."""
+
+        pass
 
     # Conversion operators
 
@@ -582,7 +596,14 @@ class Hand(object):
 
         """
 
-        pass
+        self._notify_observers()
+
+    def _notify_observers(self):
+
+        """Notifies observers."""
+
+        for target, callback in self._observers:
+            callback()
 
     def _ranks(self, sort=False, reverse=False):
 
