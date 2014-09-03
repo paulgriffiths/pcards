@@ -178,7 +178,8 @@ class Hand(object):
                 if int(idx) in range(len(self._cards)):
                     discards.append(self._cards[int(idx) - 1])
                     self._cards[int(idx) - 1] = self._deck.draw(1,
-                            face_up, face_down)[0]
+                                                                face_up,
+                                                                face_down)[0]
         else:
             for idx, card in enumerate(self._cards):
                 if card.is_face_down():
@@ -248,7 +249,8 @@ class Hand(object):
 
         """Removes an observer."""
 
-        pass
+        self._observers = [(obj, func) for obj, func in
+                           self._observers if obj is not target]
 
     # Conversion operators
 
@@ -260,7 +262,7 @@ class Hand(object):
         """
 
         return ''.join([" {0:>3}".format(c.name_string(short=True))
-                                         for c in self._cards])
+                        for c in self._cards])
 
     # Comparison operators
 
@@ -447,7 +449,7 @@ class Hand(object):
 
         """Deletes the card at the specified index."""
 
-        del(self._cards[key])
+        del self._cards[key] 
         self._cards_changed()
 
     def __iter__(self):
@@ -602,8 +604,14 @@ class Hand(object):
 
         """Notifies observers."""
 
-        for target, callback in self._observers:
+        for _, callback in self._observers:
             callback()
+
+    def _num_observers(self):
+
+        '''Returns the number of active observers.'''
+
+        return len(self._observers)
 
     def _ranks(self, sort=False, reverse=False):
 
