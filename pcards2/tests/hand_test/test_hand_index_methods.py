@@ -37,19 +37,19 @@ class TestSequenceFunctions(unittest.TestCase):
 
         card1 = Card(name="AD")
         card2 = Card(name="JS")
-        card3 = Card(name="10D")
+        card3 = Card(name="TD")
 
-        namelist = ["AD", "10C", "JS", "2H", "10D"]
+        namelist = ["AD", "TC", "JS", "2H", "TD"]
         h = Hand(namelist=namelist)
 
         self.assertEqual(h[0].index(), card1.index())
-        self.assertFalse(h[0] is h._cards[0])
+        self.assertTrue(h[0] is h._cards[0])
 
         self.assertEqual(h[2].index(), card2.index())
-        self.assertFalse(h[2] is h._cards[2])
+        self.assertTrue(h[2] is h._cards[2])
 
         self.assertEqual(h[4].index(), card3.index())
-        self.assertFalse(h[4] is h._cards[4])
+        self.assertTrue(h[4] is h._cards[4])
 
     def test_getitem_negative_single(self):
 
@@ -58,21 +58,21 @@ class TestSequenceFunctions(unittest.TestCase):
 
         """
 
-        card1 = Card(name="10D")
+        card1 = Card(name="TD")
         card2 = Card(name="2H")
-        card3 = Card(name="10C")
+        card3 = Card(name="TC")
 
-        namelist = ["AD", "10C", "JS", "2H", "10D"]
+        namelist = ["AD", "TC", "JS", "2H", "TD"]
         h = Hand(namelist=namelist)
 
         self.assertEqual(h[-1].index(), card1.index())
-        self.assertFalse(h[-1] is h._cards[-1])
+        self.assertTrue(h[-1] is h._cards[-1])
 
         self.assertEqual(h[-2].index(), card2.index())
-        self.assertFalse(h[-2] is h._cards[-2])
+        self.assertTrue(h[-2] is h._cards[-2])
 
         self.assertEqual(h[-4].index(), card3.index())
-        self.assertFalse(h[-4] is h._cards[-4])
+        self.assertTrue(h[-4] is h._cards[-4])
 
     def test_getitem_positive_slicing(self):
 
@@ -81,19 +81,19 @@ class TestSequenceFunctions(unittest.TestCase):
 
         """
 
-        namelist = ["AD", "10C", "JS", "2H", "10D"]
+        namelist = ["AD", "TC", "JS", "2H", "TD"]
         h = Hand(namelist=namelist)
 
-        handc1 = Hand(namelist=["AD", "10C", "JS"])
-        handc2 = Hand(namelist=["10C", "JS"])
-        handc3 = Hand(namelist=["JS", "2H", "10D"])
+        handc1 = Hand(namelist=["AD", "TC", "JS"])
+        handc2 = Hand(namelist=["TC", "JS"])
+        handc3 = Hand(namelist=["JS", "2H", "TD"])
 
         handt1 = h[:3]
         handt2 = h[1:3]
         handt3 = h[2:]
 
         self.assertEqual(handt1.index_list(), handc1.index_list())
-        self.assertFalse(handt1._cards[0] is h._cards[0])
+        self.assertTrue(handt1._cards[0] is h._cards[0])
 
         self.assertEqual(handt2.index_list(), handc2.index_list())
         self.assertFalse(handt2._cards[1] is h._cards[1])
@@ -108,19 +108,19 @@ class TestSequenceFunctions(unittest.TestCase):
 
         """
 
-        namelist = ["AD", "10C", "JS", "2H", "10D"]
+        namelist = ["AD", "TC", "JS", "2H", "TD"]
         h = Hand(namelist=namelist)
 
-        handc1 = Hand(namelist=["AD", "10C", "JS"])
-        handc2 = Hand(namelist=["10C", "JS"])
-        handc3 = Hand(namelist=["JS", "2H", "10D"])
+        handc1 = Hand(namelist=["AD", "TC", "JS"])
+        handc2 = Hand(namelist=["TC", "JS"])
+        handc3 = Hand(namelist=["JS", "2H", "TD"])
 
         handt1 = h[:-2]
         handt2 = h[-4:-2]
         handt3 = h[-3:]
 
         self.assertEqual(handt1.index_list(), handc1.index_list())
-        self.assertFalse(handt1._cards[0] is h._cards[0])
+        self.assertTrue(handt1._cards[0] is h._cards[0])
 
         self.assertEqual(handt2.index_list(), handc2.index_list())
         self.assertFalse(handt2._cards[1] is h._cards[1])
@@ -139,10 +139,10 @@ class TestSequenceFunctions(unittest.TestCase):
         card2 = Card(name="8H")
         card3 = Card(name="QS")
 
-        h = Hand(namelist=["AD", "10C", "JS", "2H", "10D"])
-        h1 = Hand(namelist=["JC", "10C", "JS", "2H", "10D"])
-        h2 = Hand(namelist=["JC", "10C", "8H", "2H", "10D"])
-        h3 = Hand(namelist=["JC", "10C", "8H", "2H", "QS"])
+        h = Hand(namelist=["AD", "TC", "JS", "2H", "TD"])
+        h1 = Hand(namelist=["JC", "TC", "JS", "2H", "TD"])
+        h2 = Hand(namelist=["JC", "TC", "8H", "2H", "TD"])
+        h3 = Hand(namelist=["JC", "TC", "8H", "2H", "QS"])
 
         h[0] = card1
         self.assertEqual(h.index_list(), h1.index_list())
@@ -167,10 +167,10 @@ class TestSequenceFunctions(unittest.TestCase):
         card2 = Card(name="8H")
         card3 = Card(name="QS")
 
-        h = Hand(namelist=["AD", "10C", "JS", "2H", "10D"])
-        h1 = Hand(namelist=["JC", "10C", "JS", "2H", "10D"])
-        h2 = Hand(namelist=["JC", "10C", "8H", "2H", "10D"])
-        h3 = Hand(namelist=["JC", "10C", "8H", "2H", "QS"])
+        h = Hand(namelist=["AD", "TC", "JS", "2H", "TD"])
+        h1 = Hand(namelist=["JC", "TC", "JS", "2H", "TD"])
+        h2 = Hand(namelist=["JC", "TC", "8H", "2H", "TD"])
+        h3 = Hand(namelist=["JC", "TC", "8H", "2H", "QS"])
 
         h[-5] = card1
         self.assertEqual(h.index_list(), h1.index_list())
@@ -195,22 +195,22 @@ class TestSequenceFunctions(unittest.TestCase):
         hc2 = Hand(namelist=["AC", "KS", "9D"])
         hc3 = Hand(namelist=["6H"])
 
-        h = Hand(namelist=["JC", "10C", "JS", "2H", "10D"])
-        h1 = Hand(namelist=["JC", "10C", "3C", "2H", "2H", "10D"])
+        h = Hand(namelist=["JC", "TC", "JS", "2H", "TD"])
+        h1 = Hand(namelist=["JC", "TC", "3C", "2H", "2H", "TD"])
         h2 = Hand(namelist=["JC", "AC", "3C", "KS", "2H", "9D"])
         h3 = Hand(namelist=["6H", "AC", "3C", "KS", "2H", "9D"])
 
         h[2:3] = hc1
         self.assertEqual(h.index_list(), h1.index_list())
-        self.assertFalse(h._cards[2] is hc1._cards[0])
+        self.assertTrue(h._cards[2] is hc1._cards[0])
 
         h[1:6:2] = hc2
         self.assertEqual(h.index_list(), h2.index_list())
-        self.assertFalse(h._cards[1] is hc2._cards[0])
+        self.assertTrue(h._cards[1] is hc2._cards[0])
 
         h[:1] = hc3
         self.assertEqual(h.index_list(), h3.index_list())
-        self.assertFalse(h._cards[0] is hc3._cards[0])
+        self.assertTrue(h._cards[0] is hc3._cards[0])
 
     def test_setitem_negative_slicing(self):
 
@@ -223,14 +223,14 @@ class TestSequenceFunctions(unittest.TestCase):
         hc2 = Hand(namelist=["AC", "KS", "9D"])
         hc3 = Hand(namelist=["6H"])
 
-        h = Hand(namelist=["JC", "10C", "JS", "2H", "10D"])
-        h1 = Hand(namelist=["JC", "10C", "3C", "2H", "2H", "10D"])
+        h = Hand(namelist=["JC", "TC", "JS", "2H", "TD"])
+        h1 = Hand(namelist=["JC", "TC", "3C", "2H", "2H", "TD"])
         h2 = Hand(namelist=["JC", "9D", "3C", "KS", "2H", "AC"])
         h3 = Hand(namelist=["6H", "9D", "3C", "KS", "2H", "AC"])
 
         h[-3:-2] = hc1
         self.assertEqual(h.index_list(), h1.index_list())
-        self.assertFalse(h._cards[2] is hc1._cards[0])
+        self.assertTrue(h._cards[2] is hc1._cards[0])
 
         h[-1:-6:-2] = hc2
         self.assertEqual(h.index_list(), h2.index_list())
@@ -238,7 +238,7 @@ class TestSequenceFunctions(unittest.TestCase):
 
         h[:-5] = hc3
         self.assertEqual(h.index_list(), h3.index_list())
-        self.assertFalse(h._cards[0] is hc3._cards[0])
+        self.assertTrue(h._cards[0] is hc3._cards[0])
 
     def test_delitem_positive(self):
 
@@ -247,10 +247,10 @@ class TestSequenceFunctions(unittest.TestCase):
 
         """
 
-        h = Hand(namelist=["JC", "10C", "JS", "2H", "10D", "7H", "6S"])
-        h1 = Hand(namelist=["10C", "JS", "2H", "10D", "7H", "6S"])
-        h2 = Hand(namelist=["JS", "10D", "6S"])
-        h3 = Hand(namelist=["JS", "10D"])
+        h = Hand(namelist=["JC", "TC", "JS", "2H", "TD", "7H", "6S"])
+        h1 = Hand(namelist=["TC", "JS", "2H", "TD", "7H", "6S"])
+        h2 = Hand(namelist=["JS", "TD", "6S"])
+        h3 = Hand(namelist=["JS", "TD"])
 
         del(h[0])
         self.assertEqual(h.index_list(), h1.index_list())
@@ -268,10 +268,10 @@ class TestSequenceFunctions(unittest.TestCase):
 
         """
 
-        h = Hand(namelist=["JC", "10C", "JS", "2H", "10D", "7H", "6S"])
-        h1 = Hand(namelist=["10C", "JS", "2H", "10D", "7H", "6S"])
-        h2 = Hand(namelist=["JS", "10D", "6S"])
-        h3 = Hand(namelist=["JS", "10D"])
+        h = Hand(namelist=["JC", "TC", "JS", "2H", "TD", "7H", "6S"])
+        h1 = Hand(namelist=["TC", "JS", "2H", "TD", "7H", "6S"])
+        h2 = Hand(namelist=["JS", "TD", "6S"])
+        h3 = Hand(namelist=["JS", "TD"])
 
         del(h[-7])
         self.assertEqual(h.index_list(), h1.index_list())
@@ -289,7 +289,7 @@ class TestSequenceFunctions(unittest.TestCase):
 
         """
 
-        h = Hand(namelist=["10C", "JS", "2H", "10D", "7H", "6S"])
+        h = Hand(namelist=["TC", "JS", "2H", "TD", "7H", "6S"])
 
         idx_list = [card.index() for card in h]
         self.assertEqual(idx_list, h.index_list())
@@ -301,8 +301,8 @@ class TestSequenceFunctions(unittest.TestCase):
 
         """
 
-        namelist_in = ["10C", "JS", "2H", "10D", "7H", "6S"]
-        namelist_out = ["10S", "JC", "2S", "10H", "7D", "6D"]
+        namelist_in = ["TC", "JS", "2H", "TD", "7H", "6S"]
+        namelist_out = ["TS", "JC", "2S", "TH", "7D", "6D"]
 
         h = Hand(namelist=namelist_in)
 

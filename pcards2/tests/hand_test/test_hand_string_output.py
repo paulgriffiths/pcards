@@ -34,8 +34,8 @@ class TestSequenceFunctions(unittest.TestCase):
 
         """
 
-        h = Hand(namelist=["AD", "10C", "JS", "2H", "10D"])
-        outstr = "  AD 10C  JS  2H 10D"
+        h = Hand(namelist=["AD", "TC", "JS", "2H", "TD"])
+        outstr = "  AD  TC  JS  2H  TD"
         self.assertEqual(str(h), outstr)
 
 

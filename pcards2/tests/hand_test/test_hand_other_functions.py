@@ -80,7 +80,7 @@ class TestSequenceFunctions(unittest.TestCase):
         h2 = h.get_list()
         hidx_list = [card.index() for card in h2]
         self.assertEqual(idx_list, hidx_list)
-        self.assertFalse(h2 is h._cards)
+        self.assertTrue(h2 is h._cards)
 
 
 if __name__ == "__main__":

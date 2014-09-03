@@ -350,7 +350,7 @@ class Hand(object):
         else:
             new_cards = []
             for copies in range(other):    # pylint: disable=W0612
-                new_cards.extend(self.get_list())
+                new_cards.extend(self.copy().get_list())
             return self.__class__(cardlist=new_cards, nocopy=True)
 
     def __radd__(self, other):
@@ -375,7 +375,7 @@ class Hand(object):
         else:
             new_cards = []
             for copies in range(other):    # pylint: disable=W0612
-                new_cards.extend(self.get_list())
+                new_cards.extend(self.copy().get_list())
             return self.__class__(cardlist=new_cards, nocopy=True)
 
     def __iadd__(self, other):
@@ -400,7 +400,7 @@ class Hand(object):
         else:
             new_cards = []
             for copies in range(other - 1):    # pylint: disable=W0612
-                new_cards.extend(self.get_list())
+                new_cards.extend(self.copy().get_list())
             self._cards.extend(new_cards)
             self._cards_changed()
             return self
@@ -507,7 +507,7 @@ class Hand(object):
             raise TypeError("Hand instances may only be extended with " +
                             "other Hand instances.")
         else:
-            self._cards.extend(hand.get_list())
+            self._cards.extend(hand.copy().get_list())
             self._cards_changed()
 
     def index(self, value):
