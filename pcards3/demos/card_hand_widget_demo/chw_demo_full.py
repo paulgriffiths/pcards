@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-'''Simple demonstration of CardHandWidget.
+'''Full demonstration of CardHandWidget.
 
 Invoke with 'large' on the command line to get large card
 images, which requires PIL and some of its dependencies to
