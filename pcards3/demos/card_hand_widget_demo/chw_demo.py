@@ -7,6 +7,10 @@ images, which requires PIL and some of its dependencies to
 be installed. Small card images (which just require tkinter)
 are used by default.
 
+Invoke with an integer argument on the command line to specify
+the number of cards in the hand. For this demo, the default is 3,
+the minimum is 1, and the maximum is 7.
+
 Instructions:
 1. Click the 'Deal' button to deal a hand of cards.
 2. Left-click on a card to flip it face-down (or face-up again)
@@ -30,7 +34,7 @@ class DemoWindow(Frame):
 
     '''Main demo window class.'''
 
-    def __init__(self, parent, use_large_images=False):
+    def __init__(self, parent, use_large_images=False, num_cards=3):
 
         '''Initialization method.'''
 
@@ -40,7 +44,7 @@ class DemoWindow(Frame):
 
         self._deck = pcards.Deck()
         self._hand = pcards.Hand(self._deck)
-        self._num_cards = 3
+        self._num_cards = num_cards
 
         # Create and pack card hand widget
 
@@ -63,12 +67,6 @@ class DemoWindow(Frame):
         bbw = ButtonBarWidget(self, button_defs)
         bbw.pack(side=BOTTOM)
 
-    def _exchange(self):
-
-        '''Exchanges any face-down cards.'''
-
-        self._hand.exchange(face_up=True)
-
     def _deal(self):
 
         '''Deals a new hand of cards.'''
@@ -78,6 +76,12 @@ class DemoWindow(Frame):
         self._hand.draw(self._num_cards, face_up=True)
         self._chw.deal(self._hand)
 
+    def _exchange(self):
+
+        '''Exchanges any face-down cards for new face-up cards.'''
+
+        self._hand.exchange(face_up=True)
+
 
 def main():
 
@@ -86,12 +90,29 @@ def main():
     root_window = Tk()
     root_window.title("Card Hand Widget Demo")
 
-    if len(sys.argv) > 1 and sys.argv[1].lower() == 'large':
-        use_large_images = True
-    else:
-        use_large_images = False
+    # Set default options
 
-    demo_window = DemoWindow(root_window, large=use_large_images)
+    use_large_images = False
+    num_cards = 3
+
+    # Override with specified options from command line, if any
+
+    for arg in sys.argv:
+        if arg.lower() == 'large':
+            use_large_images = True
+        else:
+            try:
+                num_arg = int(arg)
+                if num_arg > 0 and num_arg < 8:
+                    num_cards = num_arg
+            except ValueError:
+                pass
+
+    # Create and pack widget, then run main Tk loop.
+
+    demo_window = DemoWindow(root_window,
+                             use_large_images=use_large_images,
+                             num_cards=num_cards)
     demo_window.pack(side=TOP)
 
     root_window.mainloop()
