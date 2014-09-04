@@ -16,7 +16,10 @@ Instructions:
 2. Left-click on a card to flip it face-down (or face-up again)
 3. Click the 'Exchange' button to replace any face-down cards
 4. Click the 'Deal' button again at any time to deal a new hand of cards.
-5. Click the 'Quit' button to exit.
+5. Click the 'Clear' button to discard all the cards in the hand.
+6. Click the 'Info' button to output information about the hand and the
+associated deck to the console.
+7. Click the 'Quit' button to exit.
 '''
 
 
@@ -61,11 +64,20 @@ class DemoWindow(Frame):
         button_defs = [
             ("Deal", self._deal),
             ("Exchange", self._exchange),
+            ("Clear", self._clear),
+            ("Info", self._show_info),
             ("Quit", parent.quit)
             ]
 
         bbw = ButtonBarWidget(self, button_defs)
         bbw.pack(side=BOTTOM)
+
+    def _clear(self):
+
+        '''Clears the hands from the deck.'''
+
+        self._hand.discard()
+        self._chw.clear()
 
     def _deal(self):
 
@@ -82,6 +94,34 @@ class DemoWindow(Frame):
 
         self._hand.exchange(face_up=True)
 
+    def _show_info(self):
+
+        '''Prints various information about the hand to the console.'''
+
+        print("Current information:")
+
+        # Print information about deck
+
+        print("Deck contains {0} {1}, with {2} {3} in the discard pile.".
+            format(len(self._deck),
+                "card" if len(self._deck) == 1 else "cards",
+                self._deck.discard_size(),
+                "card" if self._deck.discard_size() == 1 else "cards"))
+
+        # Print information about the hand
+
+        if len(self._hand) > 0:
+            print("Hand contains {0} {1}, which {2}:".
+                format(len(self._hand),
+                    "card" if len(self._hand) == 1 else "cards",
+                    "is" if len(self._hand) == 1 else "are"))
+            for index, card in enumerate(self._hand, start=1):
+                print("{0}. {1} ({2})".format(index,
+                    card.name_string(capitalize=True),
+                    "face down" if card.is_face_down() else "face up"))
+        else:
+            print("Hand contains no cards.")
+               
 
 def main():
 
