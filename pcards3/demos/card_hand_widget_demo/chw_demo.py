@@ -19,7 +19,10 @@ Instructions:
 5. Click the 'Clear' button to discard all the cards in the hand.
 6. Click the 'Info' button to output information about the hand and the
 associated deck to the console.
-7. Click the 'Quit' button to exit.
+7. Click the 'Disable flipping' button to disable flipping of the cards.
+When disabled, the button text will change to 'Enable flipping'. Click
+this button to enable flipping again.
+8. Click the 'Quit' button to exit.
 '''
 
 
@@ -43,11 +46,13 @@ class DemoWindow(Frame):
 
         Frame.__init__(self, parent)
 
-        # Set playing cards variables
+        # Set playing cards and miscellaneous variables
 
         self._deck = pcards.Deck()
         self._hand = pcards.Hand(self._deck)
         self._num_cards = num_cards
+        self._flip_enabled = True
+        self._parent = parent
 
         # Create and pack card hand widget
 
@@ -65,21 +70,22 @@ class DemoWindow(Frame):
             ("Deal", self._deal),
             ("Exchange", self._exchange),
             ("Clear", self._clear),
+            ("Disable flipping", self._flip_flip),
             ("Info", self._show_info),
-            ("Quit", parent.quit)
+            ("Quit", self._quit)
             ]
 
         bbw = ButtonBarWidget(self, button_defs)
         bbw.pack(side=BOTTOM)
 
-    def _clear(self):
+    def _clear(self, _):
 
         '''Clears the hands from the deck.'''
 
         self._hand.discard()
         self._chw.clear()
 
-    def _deal(self):
+    def _deal(self, _):
 
         '''Deals a new hand of cards.'''
 
@@ -88,13 +94,30 @@ class DemoWindow(Frame):
         self._hand.draw(self._num_cards, face_up=True)
         self._chw.deal(self._hand)
 
-    def _exchange(self):
+    def _exchange(self, _):
 
         '''Exchanges any face-down cards for new face-up cards.'''
 
         self._hand.exchange(face_up=True)
 
-    def _show_info(self):
+    def _flip_flip(self, button):
+
+        '''Enables or disables flipping of cards.'''
+
+        self._flip_enabled = not self._flip_enabled
+        self._chw.enable_flip(self._flip_enabled)
+        if self._flip_enabled:
+            button.configure(text="Disable flipping")
+        else:
+            button.configure(text="Enable flipping")
+
+    def _quit(self, _):
+
+        '''Quits the program.'''
+
+        self._parent.quit()
+
+    def _show_info(self, _):
 
         '''Prints various information about the hand to the console.'''
 
@@ -102,8 +125,10 @@ class DemoWindow(Frame):
 
         # Print information about deck
 
-        print("Deck contains {0} {1}, with {2} {3} in the discard pile.".
-            format(len(self._deck),
+        print(
+            "Deck contains {0} {1}, with {2} "
+            "{3} in the discard pile.".format(
+                len(self._deck),
                 "card" if len(self._deck) == 1 else "cards",
                 self._deck.discard_size(),
                 "card" if self._deck.discard_size() == 1 else "cards"))
@@ -111,17 +136,23 @@ class DemoWindow(Frame):
         # Print information about the hand
 
         if len(self._hand) > 0:
-            print("Hand contains {0} {1}, which {2}:".
-                format(len(self._hand),
+            print(
+                "Hand contains {0} {1}, which {2}:".format(
+                    len(self._hand),
                     "card" if len(self._hand) == 1 else "cards",
                     "is" if len(self._hand) == 1 else "are"))
             for index, card in enumerate(self._hand, start=1):
-                print("{0}. {1} ({2})".format(index,
-                    card.name_string(capitalize=True),
-                    "face down" if card.is_face_down() else "face up"))
+                print(
+                    "{0}. {1} ({2})".format(
+                        index,
+                        card.name_string(capitalize=True),
+                        "face down" if card.is_face_down() else "face up"))
         else:
             print("Hand contains no cards.")
-               
+
+        print("Flipping is {0}.".format(
+            "enabled" if self._flip_enabled else "disabled"))
+
 
 def main():
 

@@ -20,5 +20,7 @@ class ButtonBarWidget(Frame):
         Frame.__init__(self, parent)
 
         for title, handler in buttondefs:
-            new_button = Button(self, text=title, command=handler)
+            new_button = Button(self, text=title)
+            cmd = lambda callback=handler, button=new_button: callback(button)
+            new_button.configure(command=cmd)
             new_button.pack(side=LEFT, padx=5, pady=5)
