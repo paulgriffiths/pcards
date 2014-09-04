@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 """
 Test module for PokerHand object of cards module.
@@ -16,7 +16,7 @@ Test module for PokerHand object of cards module.
 
 import unittest
 
-from ...pokerhand import PokerHand
+from pcards import PokerHand
 
 
 class TestSequenceFunctions(unittest.TestCase):

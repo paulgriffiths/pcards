@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 """Test module for container functions of deck module."""
 
@@ -12,7 +12,7 @@
 
 import unittest
 
-from ...deck import Deck
+from pcards import Deck
 
 
 class TestSequenceFunctions(unittest.TestCase):

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 """Test module other methods of Hand class."""
 
@@ -14,9 +14,7 @@
 
 import unittest
 
-from ...card import Card
-from ...deck import Deck
-from ...hand import Hand, NoAssociatedDeckError
+from pcards import Card, Deck, Hand, NoAssociatedDeckError
 
 
 class TestSequenceFunctions(unittest.TestCase):

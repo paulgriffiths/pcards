@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 """Test module comparison methods of Hand class."""
 
@@ -14,8 +14,7 @@
 
 import unittest
 
-from ...card import Card
-from ...hand import Hand
+from pcards import Card, Hand
 
 
 class TestSequenceFunctions(unittest.TestCase):

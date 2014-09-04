@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 """Test module string conversion method of Hand class."""
 
@@ -14,7 +14,7 @@
 
 import unittest
 
-from ...hand import Hand
+from pcards import Hand
 
 
 class TestSequenceFunctions(unittest.TestCase):

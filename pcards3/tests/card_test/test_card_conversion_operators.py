@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 """Unit test module for Card class conversion operators."""
 
@@ -12,7 +12,7 @@
 
 import unittest
 
-from ...card import Card
+from pcards import Card
 
 
 class TestSequenceFunctions(unittest.TestCase):

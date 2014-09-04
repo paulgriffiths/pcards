@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 """Unit test module for Card class initialization."""
 
@@ -12,7 +12,7 @@
 
 import unittest
 
-from ...card import Card, CardArgumentError
+from pcards import Card, CardArgumentError
 
 
 class TestSequenceFunctions(unittest.TestCase):

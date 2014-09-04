@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 """Test to calculate every possible 5-card poker hand using a single
 standard deck with no wildcards, and to ensure that the PokerHand
@@ -10,8 +10,7 @@ of different hands when run over the entire population.
 
 import timeit
 
-from ..deck import Deck
-from ..pokerhand import PokerHand
+from pcards import Deck, PokerHand
 
 
 def main():
